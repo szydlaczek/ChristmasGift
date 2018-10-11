@@ -42,10 +42,10 @@ namespace ChristmasGiftApp
             _context.SaveChanges();
 
             return new ResultDto
-                {
-                    Message = $"You have drawn an employee {result.FirstName} {result.LastName}",
-                    OperationResult = enums.OperationResult.Successfull
-                };
+            {
+                Message = $"You have drawn an employee {result.FirstName} {result.LastName}",
+                OperationResult = enums.OperationResult.Successfull
+            };
         }
 
         private async Task<Employee> GetEmployeeByEmail(string emailAddress)
@@ -64,6 +64,5 @@ namespace ChristmasGiftApp
             Random rand = new Random();
             return users[rand.Next(users.Count)];
         }
-        
     }
 }

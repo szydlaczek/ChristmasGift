@@ -58,7 +58,10 @@ namespace ChristmasGiftApp.Migrations
                     { 4, "r.walters@company.com", "Rob", "Walters" },
                     { 5, "d.bradley@company.com", "David", "Bradley" },
                     { 6, "r.ellerbrock@company.com", "Ruth", "Ellerbrock" },
-                    { 7, "g.erickson@company.com", "Geil", "Erickson" }
+                    { 7, "g.erickson@company.com", "Geil", "Erickson" },
+                    { 8, "steven0@adventure-works.com", "Steven", "Selikoff" },
+                    { 9, "peter0@adventure-works.com", "Peter", "Krebs" },
+                    { 10, "stuart0@adventure-works.com", "Stuart", "Munson" }
                 });
 
             migrationBuilder.CreateIndex(

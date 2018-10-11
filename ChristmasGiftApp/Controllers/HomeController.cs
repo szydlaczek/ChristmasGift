@@ -1,7 +1,5 @@
-﻿using ChristmasGiftApp.Models;
-using ChristmasGiftApp.ViewModels;
+﻿using ChristmasGiftApp.ViewModels;
 using Microsoft.AspNetCore.Mvc;
-using System.Diagnostics;
 using System.Threading.Tasks;
 
 namespace ChristmasGiftApp.Controllers
@@ -9,13 +7,14 @@ namespace ChristmasGiftApp.Controllers
     public class HomeController : Controller
     {
         private readonly GiftService _giftService;
+
         public HomeController(GiftService giftService)
         {
             _giftService = giftService;
-
         }
+
         public IActionResult Index()
-        {            
+        {
             return View();
         }
 
@@ -30,13 +29,6 @@ namespace ChristmasGiftApp.Controllers
             }
             else
                 return RedirectToAction("Index");
-            
         }
-
-       
-
-        
-
-        
     }
 }

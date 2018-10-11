@@ -9,7 +9,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace ChristmasGiftApp.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20181010222712_Create")]
+    [Migration("20181011200947_Create")]
     partial class Create
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -49,7 +49,10 @@ namespace ChristmasGiftApp.Migrations
                         new { Id = 4, EmailAddress = "r.walters@company.com", FirstName = "Rob", LastName = "Walters" },
                         new { Id = 5, EmailAddress = "d.bradley@company.com", FirstName = "David", LastName = "Bradley" },
                         new { Id = 6, EmailAddress = "r.ellerbrock@company.com", FirstName = "Ruth", LastName = "Ellerbrock" },
-                        new { Id = 7, EmailAddress = "g.erickson@company.com", FirstName = "Geil", LastName = "Erickson" }
+                        new { Id = 7, EmailAddress = "g.erickson@company.com", FirstName = "Geil", LastName = "Erickson" },
+                        new { Id = 8, EmailAddress = "steven0@adventure-works.com", FirstName = "Steven", LastName = "Selikoff" },
+                        new { Id = 9, EmailAddress = "peter0@adventure-works.com", FirstName = "Peter", LastName = "Krebs" },
+                        new { Id = 10, EmailAddress = "stuart0@adventure-works.com", FirstName = "Stuart", LastName = "Munson" }
                     );
                 });
 

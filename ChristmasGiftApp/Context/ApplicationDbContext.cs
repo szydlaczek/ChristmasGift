@@ -10,13 +10,7 @@ namespace ChristmasGiftApp.Context
 
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options) : base(options)
         {
-
         }
-
-        //protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-        //{
-        //    optionsBuilder.UseSqlServer("Server=.\\SQLEXPRESS;Database=EFCore-Gift;Trusted_Connection=True");
-        //}
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -48,7 +42,10 @@ namespace ChristmasGiftApp.Context
                new Employee { Id = 4, FirstName = "Rob", LastName = "Walters", EmailAddress = "r.walters@company.com" },
                new Employee { Id = 5, FirstName = "David", LastName = "Bradley", EmailAddress = "d.bradley@company.com" },
                new Employee { Id = 6, FirstName = "Ruth", LastName = "Ellerbrock", EmailAddress = "r.ellerbrock@company.com" },
-               new Employee { Id = 7, FirstName = "Geil", LastName = "Erickson", EmailAddress = "g.erickson@company.com" }
+               new Employee { Id = 7, FirstName = "Geil", LastName = "Erickson", EmailAddress = "g.erickson@company.com" },
+               new Employee { Id = 8, FirstName = "Steven", LastName = "Selikoff", EmailAddress = "steven0@adventure-works.com" },
+               new Employee { Id = 9, FirstName = "Peter", LastName = "Krebs", EmailAddress = "peter0@adventure-works.com" },
+               new Employee { Id = 10, FirstName = "Stuart", LastName = "Munson", EmailAddress = "stuart0@adventure-works.com" }
                 );
         }
     }
