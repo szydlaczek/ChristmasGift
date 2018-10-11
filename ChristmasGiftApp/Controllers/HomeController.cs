@@ -1,4 +1,5 @@
 ﻿using ChristmasGiftApp.Models;
+using ChristmasGiftApp.ViewModels;
 using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
 using System.Threading.Tasks;
@@ -13,35 +14,29 @@ namespace ChristmasGiftApp.Controllers
             _giftService = giftService;
 
         }
-        public async Task<IActionResult> Index()
-        {
-            var res =await _giftService.AssignRandomEmployee("k.brown@company.com");
+        public IActionResult Index()
+        {            
             return View();
         }
 
-        public IActionResult About()
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Draw(EmployeeViewModel viewModel)
         {
-            ViewData["Message"] = "Your application description page.";
-
-            return View();
+            if (ModelState.IsValid)
+            {
+                var result = await _giftService.AssignRandomEmployee(viewModel.EmailAddress);
+                return View(result);
+            }
+            else
+                return RedirectToAction("Index");
+            
         }
 
-        public IActionResult Contact()
-        {
-            ViewData["Message"] = "Your contact page.";
+       
 
-            return View();
-        }
+        
 
-        public IActionResult Privacy()
-        {
-            return View();
-        }
-
-        [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
-        public IActionResult Error()
-        {
-            return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
-        }
+        
     }
 }

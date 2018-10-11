@@ -12,6 +12,7 @@ namespace ChristmasGiftApp
     {
         private readonly ApplicationDbContext _context;
         private readonly int _currentYear;
+
         public GiftService(ApplicationDbContext context)
         {
             _context = context;
@@ -22,34 +23,47 @@ namespace ChristmasGiftApp
         {
             var employee = await GetEmployeeByEmail(emailAddress);
             if (employee == null)
-                return new ResultDto {
+                return new ResultDto
+                {
                     OperationResult = enums.OperationResult.Fail,
                     Message = $"Email {emailAddress} not found"
                 };
             var employeeGift = employee.Gifts.Where(g => g.Year == _currentYear).FirstOrDefault();
-            if (employeeGift!=null)
+            if (employeeGift != null)
             {
                 return new ResultDto
                 {
                     OperationResult = enums.OperationResult.Fail,
-                    Message = "You participated in the draw"
+                    Message = "You have been participated in the draw"
                 };
             }
             var result = await GetRandomEmployee(emailAddress);
-            return null;
+            _context.EmployeeGifts.Add(new EmployeeGift { Employee = employee, TargetEmployee = result, Year = _currentYear });
+            _context.SaveChanges();
 
+            return new ResultDto
+                {
+                    Message = $"You have drawn an employee {result.FirstName} {result.LastName}",
+                    OperationResult = enums.OperationResult.Successfull
+                };
         }
+
         private async Task<Employee> GetEmployeeByEmail(string emailAddress)
         {
-            return await _context.Employees
+            return await _context.Employees.Include(g => g.Gifts)
                 .Where(e => String.Equals(e.EmailAddress, emailAddress, StringComparison.OrdinalIgnoreCase))
                 .FirstOrDefaultAsync();
         }
+
         private async Task<Employee> GetRandomEmployee(string emailAddress)
         {
-            var employeesWithoutGift = await _context.Employees.Where(e => !string.Equals(e.EmailAddress, emailAddress) && !e.Gifts.Any(g => g.Year == _currentYear)).ToListAsync();
+            var GiftLists = await _context.EmployeeGifts.Where(eg => eg.Year == _currentYear).Select(s => s.TargetEmployeeId).ToListAsync();
+            var users = await _context.Employees
+                .Where(a => !GiftLists.Any(g => g == a.Id) && !string.Equals(a.EmailAddress, emailAddress, StringComparison.OrdinalIgnoreCase))
+                .ToListAsync();
             Random rand = new Random();
-            return employeesWithoutGift[rand.Next(employeesWithoutGift.Count)];
+            return users[rand.Next(users.Count)];
         }
+        
     }
 }
